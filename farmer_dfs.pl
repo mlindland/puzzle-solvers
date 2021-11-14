@@ -29,21 +29,23 @@ go(Start, Goal) :-
     path(Start, Goal, Been_stack). 
 test :- go(state(w,w,w,w), state(e,e,e,e)). 
 
-	% path implements a depth first search in PROLOG
-	
-	% Current state = goal, print out been list
+
 % path(Goal, Goal, Been_list) :-
 % 	reverse_print_stack(Been_list).
-	
+
 % path(State, Goal, Been_list) :-
 % 	move(State, Next),
 % 	% not(unsafe(Next)),
 % 	not(member_stack(Next, Been_list)),
 % 	stack(Next, Been_list, New_been_list),
 % 	path(Next, Goal, New_been_list), !.
+
+% Current state = goal, print out been list
 path(Goal, Goal, Been_stack) :- 
     write('Solution Path Is: '), nl, write('state(F,W,G,C)'), nl,
     reverse_print_stack(Been_stack).  
+    
+% path implements a depth first search in PROLOG
 path(State, Goal, Been_stack) :- 
     move(State, Next_state), 
     not(member_stack(Next_state, Been_stack)), 
