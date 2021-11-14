@@ -33,7 +33,7 @@ go(Start, Goal) :-
     add_to_queue(State, Empty_open, Open),
     empty_set(Closed),
     path(Open, Closed, Goal).
-test :- go(state(e,e,e,e), state(w,w,w,w)).
+testfarmerbfs :- go(state(e,e,e,e), state(w,w,w,w)).
 
 path(Open,_,_) :- empty_queue(Open),
                   write('graph searched, no solution found').

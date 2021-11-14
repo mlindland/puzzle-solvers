@@ -132,14 +132,16 @@ equal_set(S1, S2) :-
     
     % They assume a definition of precedes for the objects being handled
     
-% empty_sort_queue([]).
+empty_sort_queue([]).
 
-% member_sort_queue(E, S) :- member(E, S).
+precedes([_,_,_,_,F1], [_,_,_,_,F2]) :- F1 =< F2.
 
-% insert_sort_queue(State, [], [State]).  
-% insert_sort_queue(State, [H | T], [State, H | T]) :- 
-%     precedes(State, H).
-% insert_sort_queue(State, [H|T], [H | T_new]) :- 
-%     insert_sort_queue(State, T, T_new). 
+member_sort_queue(E, S) :- member(E, S).
+
+insert_sort_queue(State, [], [State]).  
+insert_sort_queue(State, [H | T], [State, H | T]) :- 
+    precedes(State, H).
+insert_sort_queue(State, [H|T], [H | T_new]) :- 
+    insert_sort_queue(State, T, T_new). 
     
-% remove_sort_queue(First, [First|Rest], Rest).
+remove_sort_queue(First, [First|Rest], Rest).

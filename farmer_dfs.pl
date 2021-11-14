@@ -27,7 +27,7 @@ go(Start, Goal) :-
     empty_stack(Empty_been_stack), 
     stack(Start, Empty_been_stack, Been_stack), 
     path(Start, Goal, Been_stack). 
-test :- go(state(w,w,w,w), state(e,e,e,e)). 
+testfarmerdfs :- go(state(w,w,w,w), state(e,e,e,e)). 
 
 
 % path(Goal, Goal, Been_list) :-
