@@ -12,10 +12,11 @@ state_record(State, Parent, G, H, F, [State, Parent, G, H, F]).
 go(Start, Goal) :- 
     empty_set(Closed),
     empty_sort_queue(Empty_open),
-    heuristic(Start, Goal, H),
+    heuristic(Start, H),
     state_record(Start, nil, 0, H, H, First_record),
     insert_sort_queue(First_record, Empty_open, Open),
     path(Open,Closed, Goal).
+test2heuristic :- go(state(0,0,0,0,0,0,0), state(1,1,1,1,1,1,1)). 
 
     % Path performs a best first search,
     % maintaining Open as a priority queue, and Closed as
@@ -32,7 +33,7 @@ path(Open, Closed, Goal) :-
     remove_sort_queue(First_record, Open, _),
     state_record(State, _, _, _, _, First_record),
     State = Goal,
-    write('Solution path for heuristic is: '), nl,
+    write('Solution path for heuristic is: '), nl,write('state(V1,V2,V3,W1,W2,W3,Boat)'), nl,
     printsolution(First_record, Closed).
     
     % The next record is not equal to the goal
@@ -41,7 +42,7 @@ path(Open, Closed, Goal) :-
     % I needed to use the or to make it return an empty list in this case
 path(Open, Closed, Goal) :- 
     remove_sort_queue(First_record, Open, Rest_of_open),
-    (bagof(Child, moves(First_record, Open, Closed, Child, Goal), Children);Children = []),
+    (bagof(Child, moves(First_record, Open, Closed, Child), Children);Children = []),
     insert_list(Children, Rest_of_open, New_open),
     add_to_set(First_record, Closed, New_closed),
     path(New_open, New_closed, Goal),!.
@@ -54,7 +55,7 @@ path(Open, Closed, Goal) :-
     % or other attributes
     % Also, I've commented out unsafe since the way I've coded the water jugs 
     % problem I don't really need it.
-moves(State_record, Open, Closed,Child, Goal) :-
+moves(State_record, Open, Closed,Child) :-
     state_record(State, _, G, _,_, State_record),
     move(State, Next),
     % not(unsafe(Next)),
@@ -62,7 +63,7 @@ moves(State_record, Open, Closed,Child, Goal) :-
     not(member_sort_queue(Test, Open)),
     not(member_set(Test, Closed)),
     G_new is G + 1,
-    heuristic(Next, Goal, H),
+    heuristic(Next, H),
     F is G_new + H,
     state_record(Next, State, G_new, H, F, Child).
     
