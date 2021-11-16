@@ -16,6 +16,27 @@ swap_elements(List, I, J, Result) :-
     length(BeforeI, I),
     length(BeforeJ, J).
 
+% test2 :- heuristic([0,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1],
+%     [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0], 
+%     [0,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1],
+%     [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0], H).
+
+heuristic([], [], _, _, 0).
+heuristic([Head_state | Rest_state], [_| Rest_goal],List1, List2, H) :-
+    indexof(IState, Head_state, List1),
+    indexof(IGoal, Head_state, List2),
+    get_x_y(IState, I, J),
+    get_x_y(IGoal, R, C),
+    DeltaX is C - J,
+    DeltaY is R - I,
+    abs(DeltaX, X),
+    abs(DeltaY, Y),
+    heuristic(Rest_state, Rest_goal, List1, List2, Remaining),
+    H is X + Y + Remaining.
+
+get_x_y(Index, I, J) :-
+    I is div(Index, 4),
+    J is mod(Index, 4).
 
 indexof(Index, Element, List) :-
     nth0(Index1, List, Element),
@@ -67,7 +88,7 @@ move(State, Next) :-
     write('-------------Start------------'), nl,
     writelist(State),
     write('try moving left'), nl,
-    writelist(Next), nl,
+    writelist(Next),
     write('--------------End-------------'), nl.
 
     % move right
@@ -109,6 +130,6 @@ move(State, Next) :-
     write('--------------End-------------'), nl.
 
 
-test2 :- 
-    move([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0], Next),
-    maplist(portray_clause, Next).
+% test2 :- 
+%     move([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0], Next),
+%     maplist(portray_clause, Next).

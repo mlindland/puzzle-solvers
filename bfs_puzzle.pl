@@ -13,7 +13,8 @@ go(Start, Goal) :-
     add_to_queue(State, Empty_open, Open),
     empty_set(Closed),
     path(Open, Closed, Goal).
-test1 :- go([1,2,3,0,4,5,6,7,8,9,10,11,12,13,14,15], [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).
+% test1 :- go([1,2,3,0,4,5,6,7,8,9,10,11,12,13,14,15], [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).
+test1 :- go([1,2,3,4,5,6,0,7,8,9,10,11,12,13,14,15], [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).
 
 path(Open,_,_) :- empty_queue(Open),
                   write('graph searched, no solution found').
