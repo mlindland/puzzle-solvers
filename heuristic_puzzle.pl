@@ -18,8 +18,14 @@ go(Start, Goal) :-
     path(Open,Closed, Goal).
 
 % test1 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,0,12,2,15,6,13,7,11,9,8]).
+% test2 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,0,12,2,15,6,13,7,11,9,8]).
+% test3 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,6,12,2,15,0,13,7,11,9,8]).
+% test4 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,6,12,2,0,15,13,7,11,9,8]).
+% test5 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,6,12,0,2,15,13,7,11,9,8]).
+% test6 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,0,1,6,12,10,2,15,13,7,11,9,8]).
+% test7 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,1,0,6,12,10,2,15,13,7,11,9,8]).
 test1 :- go([1,2,3,4,5,6,0,7,8,9,10,11,12,13,14,15], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]).
-
+testo :- go([5,1,3,4,2,6,7,8,9,14,10,11,13,15,12,0], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]).
     % Path performs a best first search,
     % maintaining Open as a priority queue, and Closed as
     % a set.
@@ -80,13 +86,13 @@ insert_list([State | Tail], L, New_L) :-
     % back through the states on closed using parent links.
 printsolution(Next_record, _):-  
     state_record(State, nil, _, _,_, Next_record),
-    write(State), nl.
+    writelist(State), nl.
 printsolution(Next_record, Closed) :-
     state_record(State, Parent, _, _,_, Next_record),
     state_record(Parent, _, _, _, _, Parent_record),
     member_set(Parent_record, Closed),
     printsolution(Parent_record, Closed),
-    write(State), nl.
+    writelist(State), nl.
 
 /*
 printsolution(Next_record, Closed) :-
