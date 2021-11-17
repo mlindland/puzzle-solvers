@@ -12,20 +12,22 @@ state_record(State, Parent, G, H, F, [State, Parent, G, H, F]).
 go(Start, Goal) :- 
     empty_set(Closed),
     empty_sort_queue(Empty_open),
-    heuristic(Start, Goal, Start, Goal, H),
+    heuristic(Start, Start, Goal, H),
     state_record(Start, nil, 0, H, H, First_record),
     insert_sort_queue(First_record, Empty_open, Open),
-    path(Open,Closed, Goal).
+    combinations(Goal, Result),
+    path(Open,Closed, Result).
 
-% test1 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,0,12,2,15,6,13,7,11,9,8]).
-% test2 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,0,12,2,15,6,13,7,11,9,8]).
-% test3 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,6,12,2,15,0,13,7,11,9,8]).
-% test4 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,6,12,2,0,15,13,7,11,9,8]).
-% test5 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,6,12,0,2,15,13,7,11,9,8]).
-% test6 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,0,1,6,12,10,2,15,13,7,11,9,8]).
-% test7 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,1,0,6,12,10,2,15,13,7,11,9,8]).
-test1 :- go([1,2,3,4,5,6,0,7,8,9,10,11,12,13,14,15], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]).
-testo :- go([5,1,3,4,2,6,7,8,9,14,10,11,13,15,12,0], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]).
+test1 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,0,12,2,15,6,13,7,11,9,8]).
+test2 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,0,12,2,15,6,13,7,11,9,8]).
+test3 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,6,12,2,15,0,13,7,11,9,8]).
+test4 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,6,12,2,0,15,13,7,11,9,8]).
+test5 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,6,12,0,2,15,13,7,11,9,8]).
+test6 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,0,1,6,12,10,2,15,13,7,11,9,8]).
+test7 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,1,0,6,12,10,2,15,13,7,11,9,8]).
+% test1 :- go([1,2,3,4,5,6,7,8,0,9,10,11,12,13,14,15], [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).
+testcustom :- go([5,4,2,3,1,6,7,11,12,9,10,9,13,14,15,0], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]).
+testwww :- go([5,1,3,4,2,6,7,8,9,14,10,11,13,15,12,0], [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]).
     % Path performs a best first search,
     % maintaining Open as a priority queue, and Closed as
     % a set.
@@ -38,9 +40,11 @@ path(Open,_,_) :-
     % The next record is a goal
     % Print out the list of visited states
 path(Open, Closed, Goal) :- 
+    % writelist(Goal),
     remove_sort_queue(First_record, Open, _),
     state_record(State, _, _, _, _, First_record),
-    State = Goal,
+    member(State, Goal),
+    % State = Goal,
     write('Solution path for heuristic is: '), nl,
     printsolution(First_record, Closed).
     
@@ -48,12 +52,12 @@ path(Open, Closed, Goal) :-
     % Generate its children, add to open and continue
     % Note that bagof in AAIS prolog fails if its goal fails, 
     % I needed to use the or to make it return an empty list in this case
-path(Open, Closed, Goal) :- 
+path(Open, Closed, [Goal | Rest]) :- 
     remove_sort_queue(First_record, Open, Rest_of_open),
     (bagof(Child, moves(First_record, Open, Closed, Child, Goal), Children);Children = []),
     insert_list(Children, Rest_of_open, New_open),
     add_to_set(First_record, Closed, New_closed),
-    path(New_open, New_closed, Goal),!.
+    path(New_open, New_closed, [Goal | Rest]),!.
     
     % moves generates all children of a state that are not already on
     % open or closed.  The only wierd thing here is the construction
@@ -71,7 +75,7 @@ moves(State_record, Open, Closed,Child, Goal) :-
     not(member_sort_queue(Test, Open)),
     not(member_set(Test, Closed)),
     G_new is G + 1,
-    heuristic(Next, Goal, Next, Goal, H),
+    heuristic(Next, Next, Goal, H),
     F is G_new + H,
     state_record(Next, State, G_new, H, F, Child).
     

@@ -1,4 +1,10 @@
 :- use_module(library(listing)).
+
+% test2 :- heuristic([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0],
+%     [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0], 
+%     [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0],
+%     [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0], H).
+
 writelist([]).
 writelist([N1, N2, N3, N4|Rest]) :-
     format('[~w ~w ~w ~w]~n', [N1, N2, N3, N4]),
@@ -16,22 +22,17 @@ swap_elements(List, I, J, Result) :-
     length(BeforeI, I),
     length(BeforeJ, J).
 
-% test2 :- heuristic([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0],
-%     [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0], 
-%     [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0],
-%     [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0], H).
-
-heuristic([], [], _, _, 0).
-heuristic([Head_state | Rest_state], [_| Rest_goal],List1, List2, H) :-
-    indexof(IState, Head_state, List1),
-    indexof(IGoal, Head_state, List2),
+heuristic([], _, _, 0).
+heuristic([Head_state | Rest_state],State, Goal, H) :-
+    indexof(IState, Head_state, State),
+    indexof(IGoal, Head_state, Goal),
     get_x_y(IState, I, J),
     get_x_y(IGoal, R, C),
     DeltaX is C - J,
     DeltaY is R - I,
     abs(DeltaX, X),
     abs(DeltaY, Y),
-    heuristic(Rest_state, Rest_goal, List1, List2, Remaining),
+    heuristic(Rest_state, State, Goal, Remaining),
     H is X + Y + Remaining.
 
 get_x_y(Index, I, J) :-
@@ -41,6 +42,18 @@ get_x_y(Index, I, J) :-
 indexof(Index, Element, List) :-
     nth0(Index1, List, Element),
     Index is Index1.
+
+combinations(Goal, Result) :- 
+    indexof(Index, 0, Goal),
+    length(Goal, R),
+    Index =:= R-1,
+    append([Goal], [], Result).
+combinations(Goal, Result) :-
+    append([Goal], Remaining, Result),
+    indexof(Index, 0, Goal),
+    add(Index, 1, Index1),
+    swap_elements(Goal, Index, Index1, Rest),
+    combinations(Rest, Remaining).
 
 up(State) :-
     indexof(I, 0, State),
@@ -84,50 +97,48 @@ move(State, Next) :-
     left(State),
     indexof(Index, 0, State),
     add(Index, -1, J),
-    swap_elements(State, Index, J, Next),
-    write('-------------Start------------'), nl,
-    writelist(State),
-    write('try moving left'), nl,
-    writelist(Next),
-    write('--------------End-------------'), nl.
+    swap_elements(State, Index, J, Next).
+    % write('-------------Start------------'), nl,
+    % writelist(State),
+    % write('try moving left'), nl,
+    % writelist(Next),
+    % write('--------------End-------------'), nl.
 
     % move right
 move(State, Next) :-
     right(State),
     indexof(Index, 0, State),
     add(Index, 1, J),
-    swap_elements(State, Index, J, Next),
-    write('-------------Start------------'), nl,
-    writelist(State),
-    write('try moving right'), nl,
-    writelist(Next), nl,
-    write('--------------End-------------'), nl.
-
+    swap_elements(State, Index, J, Next).
+    % write('-------------Start------------'), nl,
+    % writelist(State),
+    % write('try moving right'), nl,
+    % writelist(Next), nl,
+    % write('--------------End-------------'), nl.
 
     %move up
 move(State, Next) :-
     up(State),
     indexof(Index, 0, State),
     add(Index, -4, J),
-    swap_elements(State, Index, J, Next),
-    write('-------------Start------------'), nl,
-    writelist(State),
-    write('try moving up'), nl,
-    writelist(Next), nl,
-    write('--------------End-------------'), nl.
-
+    swap_elements(State, Index, J, Next).
+    % write('-------------Start------------'), nl,
+    % writelist(State),
+    % write('try moving up'), nl,
+    % writelist(Next), nl,
+    % write('--------------End-------------'), nl.
 
     %move down
 move(State, Next) :-
     down(State),
     indexof(Index, 0, State),
     add(Index, 4, J),
-    swap_elements(State, Index, J, Next),
-    write('-------------Start------------'), nl,
-    writelist(State),
-    write('try moving down'), nl,
-    writelist(Next), nl,
-    write('--------------End-------------'), nl.
+    swap_elements(State, Index, J, Next).
+    % write('-------------Start------------'), nl,
+    % writelist(State),
+    % write('try moving down'), nl,
+    % writelist(Next), nl,
+    % write('--------------End-------------'), nl.
 
 
 % test2 :- 
