@@ -16,8 +16,22 @@ unsafe(state(N1,N2,N3,N4,N5,N6)) :- A is N1+N2+N3, B is N4+N5+N6, unsafe_state(A
 
 writelist([]).
 writelist([X|Xs]) :- write(X), writelist(Xs), nl.
-
-heuristic(state(N1,N2,N3,N4,N5,N6, _), H) :- H is 6-N1+N2+N3+N4+N5+N6.
+heuristic(state(S1,S2,S3,S4,S5,S6,S7), state(G1,G2,G3,G4,G5,G6,G7), H) :- 
+    R1 is G1 - S1,
+    R2 is G2 - S2,
+    R3 is G3 - S3,
+    R4 is G4 - S4,
+    R5 is G5 - S5,
+    R6 is G6 - S6,
+    R7 is G7 - S7,
+    abs(R1, X1),
+    abs(R2, X2),
+    abs(R3, X3),
+    abs(R4, X4),
+    abs(R5, X5),
+    abs(R6, X6),
+    abs(R7, X7),
+    H is X1+X2+X3+X4+X5+X6+X7.
 
 move(state(X, V2, V3, X, W2, W3, X), state(Y, V2, V3, Y, W2, W3, Y)) :-
     opp(X,Y), not(unsafe(state(Y, V2, V3, Y, W2, W3))),

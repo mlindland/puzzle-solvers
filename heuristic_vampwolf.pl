@@ -12,7 +12,7 @@ state_record(State, Parent, G, H, F, [State, Parent, G, H, F]).
 go(Start, Goal) :- 
     empty_set(Closed),
     empty_sort_queue(Empty_open),
-    heuristic(Start, H),
+    heuristic(Start, Goal, H),
     state_record(Start, nil, 0, H, H, First_record),
     insert_sort_queue(First_record, Empty_open, Open),
     path(Open,Closed, Goal).
@@ -44,7 +44,7 @@ path(Open, Closed, Goal) :-
     % I needed to use the or to make it return an empty list in this case
 path(Open, Closed, Goal) :- 
     remove_sort_queue(First_record, Open, Rest_of_open),
-    (bagof(Child, moves(First_record, Open, Closed, Child), Children);Children = []),
+    (bagof(Child, moves(First_record, Open, Closed, Child, Goal), Children);Children = []),
     insert_list(Children, Rest_of_open, New_open),
     add_to_set(First_record, Closed, New_closed),
     path(New_open, New_closed, Goal),!.
@@ -57,7 +57,7 @@ path(Open, Closed, Goal) :-
     % or other attributes
     % Also, I've commented out unsafe since the way I've coded the water jugs 
     % problem I don't really need it.
-moves(State_record, Open, Closed,Child) :-
+moves(State_record, Open, Closed, Child, Goal) :-
     state_record(State, _, G, _,_, State_record),
     move(State, Next),
     % not(unsafe(Next)),
@@ -65,7 +65,7 @@ moves(State_record, Open, Closed,Child) :-
     not(member_sort_queue(Test, Open)),
     not(member_set(Test, Closed)),
     G_new is G + 1,
-    heuristic(Next, H),
+    heuristic(Next, Goal, H),
     F is G_new + H,
     state_record(Next, State, G_new, H, F, Child).
     

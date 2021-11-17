@@ -15,7 +15,8 @@ go(Start, Goal) :-
     heuristic(Start, Start, Goal, H),
     state_record(Start, nil, 0, H, H, First_record),
     insert_sort_queue(First_record, Empty_open, Open),
-    combinations(Goal, Result),
+    movezerotofront(Goal, X),
+    combinations(X, Result),
     path(Open,Closed, Result).
 
 test1 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,0,12,2,15,6,13,7,11,9,8]).

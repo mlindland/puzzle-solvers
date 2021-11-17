@@ -54,7 +54,9 @@ combinations(Goal, Result) :-
     add(Index, 1, Index1),
     swap_elements(Goal, Index, Index1, Rest),
     combinations(Rest, Remaining).
-
+movezerotofront(Goal, Result) :-
+    delete(Goal, 0, X),
+    append([0], X, Result).
 up(State) :-
     indexof(I, 0, State),
     I\==0,
