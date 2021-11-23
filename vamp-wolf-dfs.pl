@@ -4,7 +4,7 @@
 % Credit for DFS Algorithm and adt.pl goes to George F. Lugar.
 
 :- consult('adt.pl').
-:- consult('move_vampwolf.pl').
+:- consult('move_vamp_wolf.pl').
 go(Start, Goal) :- 
     empty_stack(Empty_been_stack), 
     stack(Start, Empty_been_stack, Been_stack), 

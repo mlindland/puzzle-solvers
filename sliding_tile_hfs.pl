@@ -4,7 +4,7 @@
 % Credit for BFS Algorithm and adt.pl goes to George F. Lugar.
 
 :- consult('adt.pl').
-:- consult('move_puzzle.pl').
+:- consult('move_sliding_tile.pl').
 
 state_record(State, Parent, G, H, F, [State, Parent, G, H, F]).
 
