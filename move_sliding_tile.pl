@@ -99,48 +99,48 @@ move(State, Next) :-
     left(State),
     indexof(Index, 0, State),
     add(Index, -1, J),
-    swap_elements(State, Index, J, Next).
-    % write('-------------Start------------'), nl,
-    % writelist(State),
-    % write('try moving left'), nl,
-    % writelist(Next),
-    % write('--------------End-------------'), nl.
+    swap_elements(State, Index, J, Next),
+    write('-------------Start------------'), nl,
+    writelist(State),
+    write('try moving left'), nl,
+    writelist(Next),
+    write('--------------End-------------'), nl.
 
     % move right
 move(State, Next) :-
     right(State),
     indexof(Index, 0, State),
     add(Index, 1, J),
-    swap_elements(State, Index, J, Next).
-    % write('-------------Start------------'), nl,
-    % writelist(State),
-    % write('try moving right'), nl,
-    % writelist(Next), nl,
-    % write('--------------End-------------'), nl.
+    swap_elements(State, Index, J, Next),
+    write('-------------Start------------'), nl,
+    writelist(State),
+    write('try moving right'), nl,
+    writelist(Next), nl,
+    write('--------------End-------------'), nl.
 
     %move up
 move(State, Next) :-
     up(State),
     indexof(Index, 0, State),
     add(Index, -4, J),
-    swap_elements(State, Index, J, Next).
-    % write('-------------Start------------'), nl,
-    % writelist(State),
-    % write('try moving up'), nl,
-    % writelist(Next), nl,
-    % write('--------------End-------------'), nl.
+    swap_elements(State, Index, J, Next),
+    write('-------------Start------------'), nl,
+    writelist(State),
+    write('try moving up'), nl,
+    writelist(Next), nl,
+    write('--------------End-------------'), nl.
 
     %move down
 move(State, Next) :-
     down(State),
     indexof(Index, 0, State),
     add(Index, 4, J),
-    swap_elements(State, Index, J, Next).
-    % write('-------------Start------------'), nl,
-    % writelist(State),
-    % write('try moving down'), nl,
-    % writelist(Next), nl,
-    % write('--------------End-------------'), nl.
+    swap_elements(State, Index, J, Next),
+    write('-------------Start------------'), nl,
+    writelist(State),
+    write('try moving down'), nl,
+    writelist(Next), nl,
+    write('--------------End-------------'), nl.
 
 
 % test2 :- 

@@ -1,0 +1,60 @@
+?- test1.
+try V1 - W1 100100 Boat:1
+try V1 - W1 000000 Boat:0
+try V1 rides alone 000100 Boat:0
+try W2 - W3 000111 Boat:1
+try W1 - W3000010 Boat:0
+try W1 - W3000111 Boat:1
+try V1 rides alone 100010 Boat:1
+try V1 rides alone 000010 Boat:0
+BACKTRACK at: 1000101
+try W3 rides alone 000011 Boat:1
+try W2 - W3 000000 Boat:0
+try W2 rides alone 000001 Boat:0
+try V1 rides alone 100001 Boat:1
+try V1 rides alone 000001 Boat:0
+BACKTRACK at: 1000011
+try W2 rides alone 000011 Boat:1
+BACKTRACK at: 0000010
+try W3 rides alone 000010 Boat:0
+BACKTRACK at: 0000111
+BACKTRACK at: 0000100
+try W2 - W3 000100 Boat:0
+try W2 rides alone 000101 Boat:0
+try V1 - V2 110101 Boat:1
+try V1 - W1 010001 Boat:0
+try V1 - W1 110101 Boat:1
+try V1 - V3~t111001 Boat:1
+try V1 - V2 001001 Boat:0
+try V1 - W1 101101 Boat:1
+try V1 - W1 001001 Boat:0
+try V1 - V3~t000101 Boat:0
+BACKTRACK at: 1011011
+try V1 - V2 111001 Boat:1
+BACKTRACK at: 0010010
+try V1 - V3~t010001 Boat:0
+try W3 rides alone 111000 Boat:0
+try W1 - W3111101 Boat:1
+try W1 - W3111000 Boat:0
+try V1 rides alone 011101 Boat:0
+try V1 rides alone 111101 Boat:1
+BACKTRACK at: 0111010
+try W3 rides alone 111100 Boat:0
+try W2 - W3 111111 Boat:1
+
+Solution Path for DFS Is: 
+state(V1,V2,V3,W1,W2,W3,Boat)
+state(0,0,0,0,0,0,0)
+state(1,0,0,1,0,0,1)
+state(0,0,0,1,0,0,0)
+state(0,0,0,1,1,1,1)
+state(0,0,0,1,0,1,0)
+state(1,1,0,1,0,1,1)
+state(0,1,0,0,0,1,0)
+state(1,1,1,0,0,1,1)
+state(1,1,1,0,0,0,0)
+state(1,1,1,1,0,1,1)
+state(1,1,1,1,0,0,0)
+state(1,1,1,1,1,1,1)
+true.
+

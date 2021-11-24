@@ -1,0 +1,128 @@
+?- test1.
+try V1 - W1 100100 Boat:1
+try W1 - W3000101 Boat:1
+try W2 - W3 000011 Boat:1
+try W2 rides alone 000010 Boat:1
+try W3 rides alone 000001 Boat:1
+BACKTRACK at: 0000000
+try V1 - W1 000000 Boat:0
+try V1 rides alone 000100 Boat:0
+BACKTRACK at: 1001001
+try W1 - W3000000 Boat:0
+try W3 rides alone 000100 Boat:0
+BACKTRACK at: 0001011
+try W2 - W3 000000 Boat:0
+try W2 rides alone 000001 Boat:0
+try W3 rides alone 000010 Boat:0
+BACKTRACK at: 0000111
+try W2 rides alone 000000 Boat:0
+BACKTRACK at: 0000101
+try W3 rides alone 000000 Boat:0
+BACKTRACK at: 0000011
+try W2 - W3 000111 Boat:1
+try V1 rides alone 100100 Boat:1
+try W2 rides alone 000110 Boat:1
+try W3 rides alone 000101 Boat:1
+BACKTRACK at: 0001000
+try V1 rides alone 100001 Boat:1
+try W2 rides alone 000011 Boat:1
+BACKTRACK at: 0000010
+try W1 - W3000111 Boat:1
+try V1 rides alone 100010 Boat:1
+try W3 rides alone 000011 Boat:1
+BACKTRACK at: 0000100
+try W1 - W3000010 Boat:0
+try W2 - W3 000100 Boat:0
+try W2 rides alone 000101 Boat:0
+try W3 rides alone 000110 Boat:0
+BACKTRACK at: 0001111
+try W2 rides alone 000100 Boat:0
+BACKTRACK at: 0001101
+try V1 rides alone 000001 Boat:0
+BACKTRACK at: 1000011
+try V1 rides alone 000010 Boat:0
+BACKTRACK at: 1000101
+try V1 - V2 110101 Boat:1
+try V1 - V3~t101101 Boat:1
+try W2 rides alone 000111 Boat:1
+BACKTRACK at: 0001010
+try V1 - V2 110110 Boat:1
+try V1 - V3~t101110 Boat:1
+try W3 rides alone 000111 Boat:1
+BACKTRACK at: 0001100
+try V1 - W1 010001 Boat:0
+try V1 - V2 000101 Boat:0
+BACKTRACK at: 1101011
+try V1 - W1 001001 Boat:0
+try V1 - V3~t000101 Boat:0
+BACKTRACK at: 1011011
+try V1 - W1 010010 Boat:0
+try V1 - V2 000110 Boat:0
+BACKTRACK at: 1101101
+try V1 - W1 001010 Boat:0
+try V1 - V3~t000110 Boat:0
+BACKTRACK at: 1011101
+try V1 - W1 110101 Boat:1
+try V1 - V3~t111001 Boat:1
+BACKTRACK at: 0100010
+try V1 - W1 101101 Boat:1
+try V1 - V2 111001 Boat:1
+BACKTRACK at: 0010010
+try V1 - W1 110110 Boat:1
+try V1 - V3~t111010 Boat:1
+BACKTRACK at: 0100100
+try V1 - W1 101110 Boat:1
+try V1 - V2 111010 Boat:1
+BACKTRACK at: 0010100
+try V1 - V2 001001 Boat:0
+try V1 - V3~t010001 Boat:0
+try W3 rides alone 111000 Boat:0
+BACKTRACK at: 1110011
+try V1 - V2 001010 Boat:0
+try V1 - V3~t010010 Boat:0
+try W2 rides alone 111000 Boat:0
+BACKTRACK at: 1110101
+try W1 - W3111101 Boat:1
+try W2 - W3 111011 Boat:1
+try W2 rides alone 111010 Boat:1
+try W3 rides alone 111001 Boat:1
+BACKTRACK at: 1110000
+try W1 - W3111000 Boat:0
+try V1 rides alone 011101 Boat:0
+try W3 rides alone 111100 Boat:0
+BACKTRACK at: 1111011
+try W2 - W3 111000 Boat:0
+try V1 rides alone 011011 Boat:0
+try W2 rides alone 111001 Boat:0
+try W3 rides alone 111010 Boat:0
+BACKTRACK at: 1110111
+try V1 rides alone 111101 Boat:1
+BACKTRACK at: 0111010
+try W2 - W3 111111 Boat:1
+try W2 rides alone 111110 Boat:1
+try W3 rides alone 111101 Boat:1
+BACKTRACK at: 1111000
+try V1 - W1 111111 Boat:1
+try V1 rides alone 111011 Boat:1
+BACKTRACK at: 0110110
+try W2 rides alone 111011 Boat:1
+BACKTRACK at: 1110010
+try W1 - W3111111 Boat:1
+try W3 rides alone 111011 Boat:1
+BACKTRACK at: 1110100
+
+Solution path for BFS is: 
+state(0,0,0,0,0,0,0)
+state(1,0,0,1,0,0,1)
+state(0,0,0,1,0,0,0)
+state(0,0,0,1,1,1,1)
+state(0,0,0,1,0,1,0)
+state(1,1,0,1,0,1,1)
+state(0,1,0,0,0,1,0)
+state(1,1,1,0,0,1,1)
+state(1,1,1,0,0,0,0)
+state(1,1,1,1,0,1,1)
+state(1,1,1,1,0,0,0)
+state(1,1,1,1,1,1,1)
+true .
+

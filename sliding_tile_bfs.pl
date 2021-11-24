@@ -12,17 +12,19 @@ go(Start, Goal) :-
     state_record(Start, nil, State),
     add_to_queue(State, Empty_open, Open),
     empty_set(Closed),
-    path(Open, Closed, Goal).
-% test1 :- go([1,2,3,0,4,5,6,7,8,9,10,11,12,13,14,15], [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).
+    movezerotofront(Goal, X),
+    combinations(X,Result),
+    path(Open, Closed, Result).
 test1 :- go([1,2,3,4,5,6,0,7,8,9,10,11,12,13,14,15], [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).
-
+test5 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,6,12,0,2,15,13,7,11,9,8]).
 path(Open,_,_) :- empty_queue(Open),
                   write('graph searched, no solution found').
     
 path(Open, Closed, Goal) :- 
     remove_from_queue(Next_record, Open, _),
     state_record(State, _, Next_record),
-    State = Goal,
+    member(State, Goal),
+    % State = Goal,
     write('Solution path for BFS is: '), nl,
     printsolution(Next_record, Closed).
     
