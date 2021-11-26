@@ -5,10 +5,7 @@
 
 :- consult('adt.pl').
 :- consult('move_sliding_tile.pl').
-% :- use_module(library(lists)).
 
-% state([[0,1,2,3],[4,5,6,7],[8,9,10,11],[12,13,14,15]]).
-% state([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).
 go(Start, Goal) :- 
     empty_stack(Empty_been_stack), 
     stack(Start, Empty_been_stack, Been_stack),
@@ -16,9 +13,7 @@ go(Start, Goal) :-
     combinations(X, Result),
     path(Start, Result, Been_stack). 
 
-test1 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,0,12,2,15,6,13,7,11,9,8]).
-test2 :- go([1,2,3,0,4,5,6,7,8,9,10,11,12,13,14,15], [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).
-
+test1 :- go([1,2,0,4,5,6,3,7,8,9,10,11,12,13,14,15], [1,2,3,4,5,6,0,7,8,9,10,11,12,13,14,15]).
 
 path(State, Goal, Been_stack) :-
     member(State, Goal), 

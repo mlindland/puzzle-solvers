@@ -17,8 +17,9 @@ go(Start, Goal) :-
 test1 :- go(state(0,0,0,0,0,0,0), state(1,1,1,1,1,1,1)).
 test2 :- go(state(1,1,1,1,1,1,1), state(0,0,0,0,0,0,0)).
 
-path(Open,_,_) :- empty_queue(Open),
-                  write('graph searched, no solution found').
+path(Open,_,_) :- 
+    empty_queue(Open),
+    write('graph searched, no solution found').
     
 path(Open, Closed, Goal) :- 
     remove_from_queue(Next_record, Open, _),

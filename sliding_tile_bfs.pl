@@ -15,8 +15,9 @@ go(Start, Goal) :-
     movezerotofront(Goal, X),
     combinations(X,Result),
     path(Open, Closed, Result).
-test1 :- go([1,2,3,4,5,6,0,7,8,9,10,11,12,13,14,15], [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).
-test5 :- go([5,0,4,14,10,1,3,12,2,15,6,13,7,11,9,8], [5,4,3,14,10,1,6,12,0,2,15,13,7,11,9,8]).
+
+test1 :- go([1,0,2,4,5,6,3,7,8,9,10,11,12,13,14,15], [1,2,3,4,5,6,0,7,8,9,10,11,12,13,14,15]).
+
 path(Open,_,_) :- empty_queue(Open),
                   write('graph searched, no solution found').
     
