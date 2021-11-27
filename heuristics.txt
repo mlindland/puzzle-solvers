@@ -1,0 +1,8 @@
+Vampire-Werewolf heuristic is the number of vampire and werewolves that are in their final position (East or west side).
+This heuristic evaluation does not overestimate the states cost and results in the optimal path from the
+start state to the goal state. Because we only consider legal moves, we can be certain that of any legal moves,
+it will result in a next state that is the minimum available path.
+
+Sliding tile puzzle heuristic is the manhattan distance that each number is from its goal state. 
+This heuristic does not overestimate the cost because each tile is represented with the minimal distance
+to its goal state.

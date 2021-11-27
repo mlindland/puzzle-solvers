@@ -18,8 +18,9 @@ go(Start, Goal) :-
 
 test1 :- go([1,0,2,4,5,6,3,7,8,9,10,11,12,13,14,15], [1,2,3,4,5,6,0,7,8,9,10,11,12,13,14,15]).
 
-path(Open,_,_) :- empty_queue(Open),
-                  write('graph searched, no solution found').
+path(Open,_,_) :- 
+    empty_queue(Open),
+    write('graph searched, no solution found').
     
 path(Open, Closed, Goal) :- 
     remove_from_queue(Next_record, Open, _),
