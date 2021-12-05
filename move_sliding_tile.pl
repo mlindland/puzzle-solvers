@@ -105,7 +105,6 @@ move(State, Next) :-
     write('try moving left'), nl,
     writelist(Next),
     write('--------------End-------------'), nl.
-
     % move right
 move(State, Next) :-
     right(State),
@@ -129,6 +128,7 @@ move(State, Next) :-
     write('try moving up'), nl,
     writelist(Next), nl,
     write('--------------End-------------'), nl.
+
 
     %move down
 move(State, Next) :-
